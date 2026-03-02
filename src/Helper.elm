@@ -1,9 +1,11 @@
 module Helper exposing (..)
 
+
 type GradeStatus
     = Approved
     | Failed
     | Pending
+
 
 categoricalGrade : List Float -> List GradeStatus
 categoricalGrade grades =
@@ -27,6 +29,7 @@ type AirplaneStatus
     | Delayed
     | Cancelled
 
+
 airplaneScheduleAction : AirplaneStatus -> String
 airplaneScheduleAction status =
     case status of
@@ -41,6 +44,7 @@ airplaneScheduleAction status =
 
         Cancelled ->
             "Vaya con un agente para reubicación"
+
 
 airportAction : List AirplaneStatus -> List String
 airportAction statuses =
