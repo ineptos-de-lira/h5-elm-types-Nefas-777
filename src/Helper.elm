@@ -7,20 +7,21 @@ type GradeStatus
     | Pending
 
 
+gradeValue : Float -> GradeStatus
+gradeValue grade =
+    if grade < 0 then
+        Pending
+
+    else if grade < 7 then
+        Failed
+
+    else
+        Approved
+
+
 categoricalGrade : List Float -> List GradeStatus
 categoricalGrade grades =
-    List.map
-        (\grade ->
-            if grade < 0 then
-                Pending
-
-            else if grade > 7 then
-                Approved
-
-            else
-                Failed
-        )
-        grades
+    List.map gradeValue grades
 
 
 type AirplaneStatus
@@ -33,19 +34,19 @@ type AirplaneStatus
 airplaneScheduleAction : AirplaneStatus -> String
 airplaneScheduleAction status =
     case status of
-        OnTime ->
-            "Siga a la puerta de embarque"
-
-        Boarding ->
-            "Último llamado para abordar"
+        Cancelled ->
+            "Pedir reembolso"
 
         Delayed ->
-            "Consulte las pantallas para actualizaciones"
+            "Esperar"
 
-        Cancelled ->
-            "Vaya con un agente para reubicación"
+        OnTime ->
+            "Esperar"
+
+        Boarding ->
+            "Buscar boleto"
 
 
 airportAction : List AirplaneStatus -> List String
-airportAction statuses =
-    List.map airplaneScheduleAction statuses
+airportAction list =
+    List.map airplaneScheduleAction list
